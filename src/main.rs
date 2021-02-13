@@ -1,19 +1,18 @@
-use rand::distributions::Alphanumeric;
-use rand::{thread_rng, Rng};
+use rand::Rng;
 
 fn main() {
-    //let target_string: &'static str = "Random World!";
-    let target_string: &'static str = "RandomWorld";
+    const CHARSET: &[u8] = b"ABCDEFGHIJKLMNOPQRSTUVWXYZ\
+                             abcdefghijklmnopqrstuvwxyz\
+                             0123456789! ";
+    let target_string: &'static str = "Random World!";
     let mut output_string: String = "".to_string();
     let mut position_index = 0;
     let mut iterations = 0;
+    let mut rng = rand::thread_rng();
 
     while output_string != target_string {
-        let rand_string: String = thread_rng()
-            .sample_iter(&Alphanumeric)
-            .take(1)
-            .map(char::from)
-            .collect();
+        let idx = rng.gen_range(0..CHARSET.len());
+        let rand_string: String = (CHARSET[idx] as char).to_string();
         let current_char = target_string.chars().enumerate().nth(position_index);
         if let Some(c) = &current_char {
             if c.1.to_string() == rand_string {
