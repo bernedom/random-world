@@ -29,7 +29,7 @@ fn main() {
                 position_index += 1
             }
         } else {
-            println!("Somethign went terribly wrong -> we already filled to correct string");
+            println!("Something went terribly wrong -> we already filled to correct string");
             break;
         }
 
