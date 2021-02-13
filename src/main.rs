@@ -15,6 +15,10 @@ fn main() {
         let rand_string: String = (CHARSET[idx] as char).to_string();
         let current_char = target_string.chars().enumerate().nth(position_index);
         if let Some(c) = &current_char {
+            assert!(
+                CHARSET.contains(&(c.1 as u8)),
+                "Character to be found is in available charset"
+            );
             if c.1.to_string() == rand_string {
                 output_string.push_str(&rand_string);
                 println!(
