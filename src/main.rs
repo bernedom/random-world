@@ -14,23 +14,25 @@ fn main() {
         let idx = rng.gen_range(0..CHARSET.len());
         let rand_string: String = (CHARSET[idx] as char).to_string();
         let current_char = target_string.chars().enumerate().nth(position_index);
-        if let Some(c) = &current_char {
-            assert!(
-                CHARSET.contains(&(c.1 as u8)),
-                "Character to be found is in available charset"
-            );
-            if c.1.to_string() == rand_string {
-                output_string.push_str(&rand_string);
-                println!(
-                    "Found another char '{}'  after {} iterations!",
-                    rand_string, iterations
-                );
-
-                position_index += 1
+        match current_char {
+            None => {
+                println!("Something went terribly wrong -> we already filled to correct string");
+                break;
             }
-        } else {
-            println!("Something went terribly wrong -> we already filled to correct string");
-            break;
+            Some(c) => {
+                assert!(
+                    CHARSET.contains(&(c.1 as u8)),
+                    "Character to be found is in available charset"
+                );
+                if c.1.to_string() == rand_string {
+                    output_string.push_str(&rand_string);
+                    println!(
+                        "Found another char '{}'  after {} iterations!",
+                        rand_string, iterations
+                    );
+                    position_index += 1
+                }
+            }
         }
 
         iterations += 1;
