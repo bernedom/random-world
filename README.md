@@ -30,6 +30,14 @@ cargo build
 cargo run
 ```
 
+# Rust specific features covered in this example
+
+* build & run 
+* `match` statement
+* `optionals` 
+* usage of dependency `rand`
+* mutable vs non-mutable variables
+
 
 
 
