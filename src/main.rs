@@ -14,10 +14,13 @@ fn main() {
         let idx = rng.gen_range(0..CHARSET.len());
         let rand_string: String = (CHARSET[idx] as char).to_string();
         let current_char = target_string.chars().enumerate().nth(position_index);
+
         match current_char {
             None => {
-                println!("Something went terribly wrong -> we already filled to correct string");
-                break;
+                assert!(
+                    current_char.is_some(),
+                    "Something went terribly wrong -> we already filled to correct string"
+                );
             }
             Some(c) => {
                 assert!(
