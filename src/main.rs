@@ -19,8 +19,8 @@ fn main() {
             None => {
                 assert!(
                     current_char.is_some(),
-                    "Something went terribly wrong -> we already filled to correct string"
-                );
+                    "Could not retrieve {}th character from target string", position_index);
+                
             }
             Some(c) => {
                 assert!(
