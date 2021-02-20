@@ -12,7 +12,7 @@ fn main() {
 
     while output_string != target_string {
         let idx = rng.gen_range(0..CHARSET.len());
-        let rand_string: String = (CHARSET[idx] as char).to_string();
+        let rand_string = CHARSET[idx] as char;
         let current_char = target_string.chars().enumerate().nth(position_index);
 
         match current_char {
@@ -28,8 +28,8 @@ fn main() {
                     CHARSET.contains(&(c.1 as u8)),
                     "Character to be found is in available charset"
                 );
-                if c.1.to_string() == rand_string {
-                    output_string.push_str(&rand_string);
+                if c.1 == rand_string {
+                    output_string.insert(output_string.len(), rand_string);
                     println!(
                         "Found another char '{}'  after {} iterations!",
                         rand_string, iterations
