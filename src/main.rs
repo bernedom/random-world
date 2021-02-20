@@ -5,7 +5,7 @@ fn main() {
                              abcdefghijklmnopqrstuvwxyz\
                              0123456789! ";
     let target_string: &'static str = "Random World!";
-    let mut output_string: String = "".to_string();
+    let mut output_string = String::with_capacity(target_string.len());
     let mut position_index = 0;
     let mut iterations = 0;
     let mut rng = rand::thread_rng();
@@ -19,8 +19,9 @@ fn main() {
             None => {
                 assert!(
                     current_char.is_some(),
-                    "Could not retrieve {}th character from target string", position_index);
-                
+                    "Could not retrieve {}th character from target string",
+                    position_index
+                );
             }
             Some(c) => {
                 assert!(
