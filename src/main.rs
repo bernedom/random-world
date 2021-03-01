@@ -6,40 +6,29 @@ fn main() {
                              0123456789! ";
     let target_string: &'static str = "Random World!";
     let mut output_string = String::with_capacity(target_string.len());
-    let mut position_index = 0;
     let mut iterations = 0;
     let mut rng = rand::thread_rng();
 
-    while output_string != target_string {
-        let idx = rng.gen_range(0..CHARSET.len());
-        let rand_string = CHARSET[idx] as char;
-        let current_char = target_string.chars().enumerate().nth(position_index);
+    for current_char in target_string.chars() {
+        let mut retrieve_random = || -> char {
+            let idx = rng.gen_range(0..CHARSET.len());
+            CHARSET[idx] as char
+        };
+        let mut rand_string = retrieve_random();
 
-        match current_char {
-            None => {
-                assert!(
-                    current_char.is_some(),
-                    "Could not retrieve {}th character from target string",
-                    position_index
-                );
-            }
-            Some(c) => {
-                assert!(
-                    CHARSET.contains(&(c.1 as u8)),
-                    "Character to be found is in available charset"
-                );
-                if c.1 == rand_string {
-                    output_string.insert(output_string.len(), rand_string);
-                    println!(
-                        "Found another char '{}'  after {} iterations!",
-                        rand_string, iterations
-                    );
-                    position_index += 1
-                }
-            }
+        assert!(
+            CHARSET.contains(&(current_char as u8)),
+            "Character to be found is in available charset"
+        );
+        while current_char != rand_string {
+            iterations += 1;
+            rand_string = retrieve_random();
         }
-
-        iterations += 1;
+        output_string.insert(output_string.len(), rand_string);
+        println!(
+            "Found another char '{}'  after {} iterations!",
+            rand_string, iterations
+        );
     }
 
     println!(
