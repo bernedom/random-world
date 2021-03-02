@@ -1,5 +1,7 @@
 # random-world
 
+[![CI](https://github.com/bernedom/random-world/actions/workflows/rust.yml/badge.svg)](https://github.com/bernedom/random-world/actions)
+
 random-world creates and prints a string by guessing each character of the string until the string matches "Random World!". The application itself serves no useful purposes except for me to learn [rust](https://www.rust-lang.org/). 
 
 Set up rust by following the [getting started instructions](https://www.rust-lang.org/learn/get-started)
@@ -37,7 +39,5 @@ cargo run
 * `optionals` 
 * usage of dependency `rand`
 * mutable vs non-mutable variables
-
-
-
-
+* iterators
+* closures
