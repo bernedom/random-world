@@ -1,4 +1,7 @@
 use rand::Rng;
+use std::str;
+
+extern crate crossbeam;
 
 // consider returning an optional for the fun of having it and removing the assert
 fn match_random(current_char: char) -> (i32, char) {
@@ -24,23 +27,40 @@ fn match_random(current_char: char) -> (i32, char) {
     (iterations, rand_string)
 }
 
+//Try this out https://stackoverflow.com/questions/33818141/how-do-i-pass-disjoint-slices-from-a-vector-to-different-threads
+
 fn main() {
-    let target_string: &'static str = "Random World!";
-    let mut output_string = String::with_capacity(target_string.len());
-    let mut iterations = 0;
+    const TARGET_STRING: &'static str = "Random World!";
+    
+    let mut output_string: [u8; TARGET_STRING.len()] = [0; TARGET_STRING.len()];
 
-    for current_char in target_string.chars() {
-        let match_result = match_random(current_char);
-        output_string.insert(output_string.len(), match_result.1);
-        iterations += match_result.0;
-        println!(
-            "Found another char '{}'  after {} iterations!",
-            match_result.1, iterations
-        );
-    }
+    let mut chunks = output_string.chunks_mut(1);
+    let _ = crossbeam::scope(|scope| {
+        for current_char in TARGET_STRING.chars().enumerate() {
+            
+            let target_char = match chunks.next() { Some(v) => v, None => panic!("Could not chunk it"),};
+            scope.spawn(move |_| {
+                let match_result = match_random(current_char.1);
+                println!(
+                    "Found char '{}' at position {} after {} iterations!",
+                    match_result.1, current_char.0, match_result.0
+                );
+                
+                target_char[0] = match_result.1 as u8;
+                
+            });
 
-    println!(
-        "Found desired string '{}' after {} iterations ",
-        output_string, iterations
-    );
+        }
+
+    });
+
+   
+
+   
+    let output_string_str = match std::str::from_utf8(&output_string[0..output_string.len()]) {
+        Ok(v) => v,
+        Err(e) => panic!("Invalig UTF-8 sequence: {}", e),
+    };
+
+    println!("Found desired string '{}'", output_string_str);
 }
