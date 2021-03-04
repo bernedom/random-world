@@ -10,16 +10,18 @@ fn main() {
     let mut rng = rand::thread_rng();
 
     for current_char in target_string.chars() {
-        let mut retrieve_random = || -> char {
-            let idx = rng.gen_range(0..CHARSET.len());
-            CHARSET[idx] as char
-        };
-        let mut rand_string = retrieve_random();
-
         assert!(
             CHARSET.contains(&(current_char as u8)),
             "Character to be found is in available charset"
         );
+
+        let mut retrieve_random = || -> char {
+            let idx = rng.gen_range(0..CHARSET.len());
+            CHARSET[idx] as char
+        };
+                
+        let mut rand_string = retrieve_random();
+
         while current_char != rand_string {
             iterations += 1;
             rand_string = retrieve_random();
