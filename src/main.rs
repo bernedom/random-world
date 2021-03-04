@@ -19,17 +19,24 @@ fn main() {
             let idx = rng.gen_range(0..CHARSET.len());
             CHARSET[idx] as char
         };
-                
-        let mut rand_string = retrieve_random();
 
-        while current_char != rand_string {
-            iterations += 1;
-            rand_string = retrieve_random();
-        }
-        output_string.insert(output_string.len(), rand_string);
+        let mut match_random = || -> (u32, char) {
+            let mut rand_string = retrieve_random();
+            let mut iterations = 1;
+            while current_char != rand_string {
+                rand_string = retrieve_random();
+                iterations+=1;
+            }
+            (iterations, rand_string)
+        };
+                
+        let match_result = match_random();
+        
+        output_string.insert(output_string.len(), match_result.1);
+        iterations += match_result.0;
         println!(
             "Found another char '{}'  after {} iterations!",
-            rand_string, iterations
+            match_result.1, iterations
         );
     }
 
