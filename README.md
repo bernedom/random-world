@@ -2,7 +2,7 @@
 
 [![CI](https://github.com/bernedom/random-world/actions/workflows/rust.yml/badge.svg)](https://github.com/bernedom/random-world/actions)
 
-random-world creates and prints a string by guessing each character of the string until the string matches "Random World!". The application itself serves no useful purposes except for me to learn [rust](https://www.rust-lang.org/). 
+random-world creates and prints a string by guessing each character of the string until the string matches "Random World!". The application itself serves no useful purposes except for me to learn [rust](https://www.rust-lang.org/). Guessing the characters happens in parallel threads as rust boasts of `fearless concurrency`
 
 Set up rust by following the [getting started instructions](https://www.rust-lang.org/learn/get-started)
 
@@ -35,8 +35,10 @@ cargo run
 # Rust specific features covered in this example
 
 * build & run 
-* usage of dependency `rand`
+* usage of dependency `rand` and `crossbeam`
 * mutable vs non-mutable variables
 * functions
 * iterators
 * closures
+* parallel threads using `crossbeam`
+* optionals
