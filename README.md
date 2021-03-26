@@ -9,20 +9,20 @@ Set up rust by following the [getting started instructions](https://www.rust-lan
 example output: 
 ```
 $cargo run
-Found another char 'R'  after 56 iterations!
-Found another char 'a'  after 103 iterations!
-Found another char 'n'  after 319 iterations!
-Found another char 'd'  after 411 iterations!
-Found another char 'o'  after 463 iterations!
-Found another char 'm'  after 474 iterations!
-Found another char ' '  after 477 iterations!
-Found another char 'W'  after 707 iterations!
-Found another char 'o'  after 759 iterations!
-Found another char 'r'  after 813 iterations!
-Found another char 'l'  after 905 iterations!
-Found another char 'd'  after 997 iterations!
-Found another char '!'  after 1006 iterations!
-Found desired string 'Random World!' after 1007 iterations
+Found char 'R' at position 0 after 130 iterations!
+Found char 'a' at position 1 after 72 iterations!
+Found char 'n' at position 2 after 92 iterations!
+Found char 'd' at position 3 after 154 iterations!
+Found char ' ' at position 6 after 22 iterations!
+Found char 'o' at position 4 after 156 iterations!
+Found char 'm' at position 5 after 161 iterations!
+Found char 'W' at position 7 after 34 iterations!
+Found char 'o' at position 8 after 33 iterations!
+Found char 'r' at position 9 after 1 iterations!
+Found char 'l' at position 10 after 33 iterations!
+Found char 'd' at position 11 after 125 iterations!
+Found char '!' at position 12 after 328 iterations!
+Found desired string 'Random World!'
 ```
 
 # build & run
