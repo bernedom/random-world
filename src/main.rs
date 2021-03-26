@@ -53,9 +53,6 @@ fn main() {
         }
 
     });
-
-   
-
    
     let output_string_str = match std::str::from_utf8(&output_string[0..output_string.len()]) {
         Ok(v) => v,
